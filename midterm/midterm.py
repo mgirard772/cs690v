@@ -109,7 +109,7 @@ hover1.tooltips = OrderedDict([
     ("Year", "@year"),
 ])
 
-fig2 = figure(title = 'Artist Average Metalness vs. Average Unique Words', tools = TOOLS)
+fig2 = figure(title = 'Artist Song Metalness vs. Unique Words', tools = TOOLS)
 fig2.circle('unique_words', 'metalness', source=source, size=10)
 hover2 = fig2.select(dict(type=HoverTool))
 hover2.tooltips = OrderedDict([
@@ -157,18 +157,18 @@ source_clust = ColumnDataSource(data={'year': temp_clust.year,
                                       'labels': labels['labels'],
                                       'colors': labels['colors']})
 
-fig4 = figure(title = 'Artist Songs Metalness By Year, Clustered')
+fig4 = figure(title = 'Artist Song Metalness By Year, Clustered')
 fig4.circle('year', 'metalness', fill_color = 'colors', source=source_clust, size=10)
 
-fig5 = figure(title = 'Artist Songs Metalness vs. Unique Words, Clustered')
+fig5 = figure(title = 'Artist Song Metalness vs. Unique Words, Clustered')
 fig5.circle('unique_words', 'metalness', fill_color = 'colors', source=source_clust, size=10)
 
-fig6 = figure(title = 'Artist Songs Metalness vs. Total Words, Clustered')
+fig6 = figure(title = 'Artist Song Metalness vs. Total Words, Clustered')
 fig6.circle('total_words', 'metalness', fill_color = 'colors', source=source_clust, size=10)
 
 # Establish callbacks
 def update_artist(attrname, old, new):
-    # Grab dropdown selections
+    # Grab dropdown selection
     selected_artist = select_artist.value
     temp = data.loc[data.artist == selected_artist, :]
     avg_metalness_year = temp.groupby('year')['metalness'].agg('mean').to_frame().reset_index()
